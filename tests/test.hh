@@ -19,16 +19,15 @@
 // #define DEBUG <- will use this when adding the debug options feature.
 // TODO : add log messages for DEBUG and INFO
 
-template<typename T>
-bool loop_test(T test)
+bool loop_test(bool test)
 {
 	if(test)
 		return 0; // test successful
 	return 1;     // test failed
 }
 
-template<typename T, typename... Args>
-bool loop_test(T test, Args... args)
+template<typename... Args>
+bool loop_test(bool test, Args... args)
 {
 	if(!test)
 		return 1;   // test failed
