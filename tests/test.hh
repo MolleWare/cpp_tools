@@ -18,7 +18,6 @@
 
 // #define DEBUG <- will use this when adding the debug options feature.
 // TODO : add log messages for DEBUG and INFO
-// TODO : add verbosity for witch error happend where -> give line number from the main file
 
 template<typename T>
 bool loop_test(T test)
@@ -40,7 +39,8 @@ bool loop_test(T test, Args... args)
 {\
 	bool result = loop_test(true, __VA_ARGS__); \
 	error_counter += result; \
-	std::cout << (result ? "Failed" : "Ok    ") << " : "  << name << "    " << __FILE__ << ":" << __LINE__ << "  " << __func__ << std::endl; \
+	std::cout << (result ? "\033[31mFailed\033[0m" : "\033[32mOk    \033[0m") << " : "  << name << "    " << __FILE__ << ":" << __LINE__ << "  " << __func__ << std::endl; \
+	result = false; \
 }
 
 
@@ -51,7 +51,19 @@ bool loop_test(T test, Args... args)
 	if(tmp_counter != 0) \
 	{ \
 		error_counter += tmp_counter; \
-		std::cout << __FILE__ << ":" << __LINE__ << " error_counter: " << error_counter << std::endl << std::endl; \
+		std::cout << __FILE__ << ":" << __LINE__ << "\033[31m error_counter: " << tmp_counter << "\033[0m" << std::endl << std::endl; \
+	} \
+}
+
+#define END_TESTS(error_counter) \
+{ \
+	if(error_counter == 0) \
+	{ \
+		std::cout << "All tests successful!" << std::endl; \
+	} \
+	else \
+	{ \
+		std::cout << "\033[31mTotal errors: " << error_counter << "\033[0m" << std::endl; \
 	} \
 }
 
