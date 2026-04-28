@@ -39,7 +39,6 @@ bool loop_test(bool test, Args... args)
 	bool result = loop_test(true, __VA_ARGS__); \
 	error_counter += result; \
 	std::cout << (result ? "\033[31mFailed\033[0m" : "\033[32mOk    \033[0m") << " : "  << name << "    " << __FILE__ << ":" << __LINE__ << "  " << __func__ << std::endl; \
-	result = false; \
 }
 
 

@@ -48,7 +48,6 @@ int main(int, char**)
 
 	GROUP_TEST(test_case_one);
 	GROUP_TEST(test_case_two);
-
 	END_TESTS(error_counter);
 
 	return 0;
